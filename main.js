@@ -52,17 +52,12 @@ function main() {
   
       var cubeColors = [
         [],
-        [1.0, 0.0, 0.0],    // merah
-        //[1.0, 0.0, 0.0],    // merah
-        //[1.0, 0.0, 0.0],    // merah
-        //[1.0, 0.0, 0.0],    // merah
-        //[1.0, 0.0, 0.0],    // merah
-        //[1.0, 0.0, 0.0],    // merah
-         [0.0, 1.0, 0.0],    // hijau
-         [0.0, 0.0, 1.0],    // biru
-         [1.0, 1.0, 1.0],    // putih
-         [1.0, 0.5, 0.0],    // oranye
-         [1.0, 1.0, 0.0],    // kuning
+        [0.7, 0.2, 0.3],    // merah
+         [0.4, 0.3, 0.3],    // cokelat
+         [0.0, 0.7, 0.6],    // tosca
+         [0.4, 0.3, 0.3],    // cokelat
+         [0.0, 0.7, 0.5],    // tosca
+         [0.6, 0.3, 0.4],    // pink
         []
       ];
   
@@ -327,7 +322,7 @@ function main() {
     gl.uniformMatrix4fv(u_Projection, false, projection);
   
     var linearspeed = 0.01;
-    var angularspeed = glMatrix.glMatrix.toRadian(1);
+    var angularspeed = glMatrix.glMatrix.toRadian(4);
     function onKeyDown(event) {
       console.log(event.keyCode);
       if (event.keyCode == 65) {
