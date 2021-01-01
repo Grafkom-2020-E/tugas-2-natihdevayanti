@@ -322,7 +322,7 @@ function main() {
     gl.uniformMatrix4fv(u_Projection, false, projection);
   
     var linearspeed = 0.01;
-    var angularspeed = glMatrix.glMatrix.toRadian(4);
+    var angularspeed = glMatrix.glMatrix.toRadian(1);
     function onKeyDown(event) {
       console.log(event.keyCode);
       if (event.keyCode == 65) {
@@ -331,18 +331,18 @@ function main() {
       else if (event.keyCode == 68) {
         glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [0, 1.0, 0.0]);
       } // D = 68
-      if (event.keyCode == 87) {
-        glMatrix.mat4.translate(model, model, [0.0, linearspeed, 0.0]);
-      } // W = 87
-      if (event.keyCode == 83) {
-        glMatrix.mat4.translate(model, model, [0.0, -linearspeed, 0.0]);
-      } // S = 83
+      //if (event.keyCode == 38) {
+        //glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [-1.0, 0.0, 0.0]);
+      //} //up = 38
+      //if (event.keyCode == 40) {
+        //glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [1.0, 0.0, 0.0]);
+      //} //down = 40
     }
     document.addEventListener('keydown', onKeyDown);
   
     var uNormalModel = gl.getUniformLocation(shaderProgram, 'u_NormalModel');
     var uAmbientColor = gl.getUniformLocation(shaderProgram, 'u_AmbientColor');
-    gl.uniform3fv(uAmbientColor, [0.5, 0.5, 0.5]);
+    gl.uniform3fv(uAmbientColor, [0.3, 0.3, 0.3]);
     var uLightColor = gl.getUniformLocation(shaderProgram, 'u_LightColor');
     gl.uniform3fv(uLightColor, [1, 1, 1]);
     var uLightPosition = gl.getUniformLocation(shaderProgram, 'u_LightPosition');
@@ -352,7 +352,7 @@ function main() {
     
     function render() {
       resizer();
-      //glMatrix.mat4.rotate(model, model, angularspeed, [1.0, 1.0, 1.0]);
+     // glMatrix.mat4.rotate(model, model, angularspeed, [1.0, 1.0, 1.0]);
       gl.uniformMatrix4fv(u_Model, false, model);
       gl.uniformMatrix4fv(u_View, false, view);
       var normalModel = glMatrix.mat3.create();
