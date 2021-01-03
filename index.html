@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Belajar WebGL</title>
-  </head>
-  <body onload="main()">
-    <canvas id="myCanvas" width="1300" height="1000">
-      Peramban ini tidak mendukung kanvas HTML 5</canvas
-    >
-    <script src="gl-matrix-min.js" type="text/javascript"></script>
-    <script src="main.js" type="text/javascript"></script>
-    <script id="vertexShaderSource" type="notjs">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belajar WebGL</title>
+</head>
+
+<body onload="main()">
+  <canvas id="myCanvas" width="1300" height="1000">
+    Peramban ini tidak mendukung kanvas HTML 5</canvas>
+  <script src="gl-matrix-min.js" type="text/javascript"></script>
+  <script src="main.js" type="text/javascript"></script>
+  <script id="vertexShaderSource" type="notjs">
       attribute vec3 a_Position;
       attribute vec3 a_Color;
       attribute vec3 a_Normal;
@@ -28,7 +29,7 @@
         v_Normal = a_Normal;
       }
     </script>
-    <script id="fragmentShaderSource" type="notjs">
+  <script id="fragmentShaderSource" type="notjs">
       precision mediump float;
       varying vec3 v_Position;
       varying vec3 v_Color;
@@ -46,5 +47,6 @@
         gl_FragColor = vec4(ambient + diffuse, 1.0);
       }
     </script>
-  </body>
+</body>
+
 </html>
