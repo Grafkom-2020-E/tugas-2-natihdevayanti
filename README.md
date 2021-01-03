@@ -14,7 +14,7 @@ Membuat aplikasi grafika berbasis web (HTML, CSS, JavaScript) untuk menampilkan 
 * Titik Cahaya bisa digerakkan naik dan turun dengan menggunakan tombol `W` dan `S`.
 * Kamera bisa digerakkan ke kiri dan ke kanan dengan menggunakan tombol `A` dan `D`, dengan fokus ke titik cahaya.
 ## Demo Visualisasi
-Silakan tunjukkan hasil pengerjaan aplikasi grafikanya di sini sebagai GIF atau video (boleh embed atau link)
+https://intip.in/demotugas
 ## Batas Akhir Pengerjaan
 Ahad, 03 Januari 2021
 
