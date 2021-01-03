@@ -7,6 +7,7 @@
   <title>Tugas WebGL Natih</title>
 </head>
 
+
 <body onload="main()">
   <canvas id="myCanvas" width="1300" height="1000">
     Peramban ini tidak mendukung kanvas HTML 5</canvas>
@@ -29,6 +30,20 @@
         v_Normal = a_Normal;
       }
     </script>
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://asset-a.grid.id/crop/0x0:0x0/x/photo/2018/04/11/2227951357.jpg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: block;
+    }
+  </style>
 
   <script id="fragmentShaderSource" type="notjs">
       precision mediump float;

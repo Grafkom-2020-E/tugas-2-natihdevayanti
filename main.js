@@ -154,8 +154,6 @@ function main() {
         [1.0, 0.0, 0.0],    // kanan
         [0.0, 0.0, -1.0],   // belakang
         [0.0, -1.0, 0.0],   // bawah
-
-
         []
     ];
     //bar kanan
@@ -165,7 +163,7 @@ function main() {
         [1.0, 0.0, 0.0],    // kanan
         [0.0, 1.0, 0.0],    // atas
         [-1.0, 0.0, 0.0],   // kiri
-        [0.0, 1.0, -0.5],   // belakang
+        [0.0, 1.0, -0.4],   // belakang
         [0.0, -1.0, 0.0],   // bawah
         []
     ];
@@ -189,7 +187,7 @@ function main() {
         [1.0, 0.0, 0.0],    // kanan
         [0.0, 1.0, 0.0],    // atas
         [-1.0, 0.0, 0.0],   // kiri
-        [0.0, 0.0, 1.0],   // belakang
+        [0.0, 1.0, -0.4],   // belakang
         [0.0, -1.0, 0.0],   // bawah
         []
     ];
@@ -538,7 +536,7 @@ function main() {
     //glMatrix.mat4.rotate(view, view, angularspeed, [1, 1, 1]);
     function render() {
         resizer();
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clearColor(0.0, 0.0, 0.0, 0.0);
         drawVertices(verticesKubus, 100, true);
         drawVertices(verticeskiri, 1, false);
         drawVertices(verticeskanan, 800, false);
