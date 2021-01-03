@@ -1,88 +1,96 @@
 function main() {
     var canvas = document.getElementById("myCanvas");
     var gl = canvas.getContext("webgl");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
 
+    let rightvertices = [];
+    let leftVertices = [];
+    let cubeVertices = [];
     var vertices = [];
 
+    //N KANAN
     //kanan
     var cubePoints1 = [
         [0.8, 0.5, 0.05],   // L, 0, kanan atas depan
-        [0.6, 0.5, 0.05],   // I, 1, kiri atas depan
-        [0.8, -0.5, 0.05],   // K, 2, kanan bawah depan
-        [0.6, -0.5, 0.05],    // J, 3, kiri bawah depan
+        [0.8, -0.5, 0.05],   // K, 1, kanan bawah depan
+        [0.6, -0.5, 0.05],    // J, 2, kiri bawah depan
+        [0.6, 0.5, 0.05],   // I, 3, kiri atas depan
         [0.9, 0.6, -0.05],   // P, 4, kanan atas belakang
-        [0.7, 0.6, -0.05],   // M, 5, kiri atas belakang
-        [0.9, -0.4, -0.05],   // O, 6, kanan bawah belakang
-        [0.7, -0.4, -0.05]   // N, 7, kiri bawah belakang
+        [0.9, -0.4, -0.05],   // O, 5, kanan bawah belakang
+        [0.7, -0.4, -0.05],  // N, 6, kiri bawah belakang
+        [0.7, 0.6, -0.05],   // M, 7, kiri atas belakang
     ];
 
     //kiri
     var cubePoints2 = [
         [0.4, 0.5, 0.05], //U1, 0,kanan atas depan
-        [0.2, 0.5, 0.05], //V1, 1, kiri atas depan
         [0.4, -0.5, 0.05], //B, 2, kanan bawah depan
         [0.2, -0.5, 0.05], //T1, 3,kiri bawah depan
+        [0.2, 0.5, 0.05], //V1, 1, kiri atas depan
         [0.5, 0.6, -0.05], //Q1, 4, kanan atas belakang
-        [0.3, 0.6, -0.05], //R1, 5,  kiri atas belakang
         [0.5, -0.4, -0.05], //F, 6, kanan bawah belakang
-        [0.3, -0.4, -0.05] //S1, 7, kiri bawah belakang
+        [0.3, -0.4, -0.05], //S1, 7, kiri bawah belakang
+        [0.3, 0.6, -0.05], //R1, 5,  kiri atas belakang
     ];
 
     //miring
     var cubePoints3 = [
-        [0.6, 0, 0.05],   // E, 0, anan atas depan
-        [0.4, 0.5, 0.05],   // U1, 1, kiri atas depan
+        [0.6, 0, 0.05],   // E, 0, kanan atas depan
         [0.6, -0.5, 0.05],   // J, 2, kanan bawah depan
         [0.4, 0, 0.05],   // D, 3,kiri bawah depan
+        [0.4, 0.5, 0.05],   // U1, 1, kiri atas depan
         [0.7, 0.1, -0.05],   // A, 4, kanan atas belakang
-        [0.5, 0.6, -0.05],   // Q1, 5,  kiri atas belakang
         [0.7, -0.4, -0.05],   // N,6, kanan bawah belakang
         [0.5, 0.1, -0.05],   // C, 7, kiri bawah belakang
+        [0.5, 0.6, -0.05],   // Q1, 5,  kiri atas belakang
     ];
 
-
+    //N KIRI
+    //kanan
     var cubePoints4 = [
         [-0.2, 0.5, 0.05],   // A1, 0, kanan atas depan
-        [-0.4, 0.5, 0.05],   // D1, 1, kiri atas depan
         [-0.2, -0.5, 0.05],   // C1, 2, kanan bawah depan
         [-0.4, -0.5, 0.05],    // B1, 3, kiri bawah depan
+        [-0.4, 0.5, 0.05],   // D1, 1, kiri atas depan
         [-0.3, 0.6, -0.05],   // H1, 4, kanan atas belakang
-        [-0.5, 0.6, -0.05],   // E1, 5, kiri atas belakang
         [-0.3, -0.4, -0.05],   // O, 6, kanan bawah belakang
-        [-0.5, -0.4, -0.05]   // F1, 7, kiri bawah belakang
+        [-0.5, -0.4, -0.05],   // F1, 7, kiri bawah belakang
+        [-0.5, 0.6, -0.05]   // E1, 5, kiri atas belakang
     ];
-
+    //kiri
     var cubePoints5 = [
         [-0.6, 0.5, 0.05],   // S, 0, kanan atas depan
-        [-0.8, 0.5, 0.05],   // T, 1, kiri atas depan
         [-0.6, -0.5, 0.05],   // R, 2, kanan bawah depan
         [-0.8, -0.5, 0.05],    // Q, 3, kiri bawah depan
+        [-0.8, 0.5, 0.05],   // T, 1, kiri atas depan
         [-0.7, 0.6, -0.05],   // W, 4, kanan atas belakang
-        [-0.9, 0.6, -0.05],   // Z, 5, kiri atas belakang
         [-0.7, -0.4, -0.05],   // V, 6, kanan bawah belakang
-        [-0.9, -0.4, -0.05]   // U, 7, kiri bawah belakang
+        [-0.9, -0.4, -0.05],   // U, 7, kiri bawah belakang
+        [-0.9, 0.6, -0.05]   // Z, 5, kiri atas belakang
     ];
 
+    //miriing
     var cubePoints6 = [
         [-0.4, 0, 0.05],   // G, 0, kanan atas depan
-        [-0.6, 0.5, 0.05],   // D, 1, kiri atas depan
         [-0.4, -0.5, 0.05],   // B1, 2, kanan bawah depan
         [-0.6, 0, 0.05],    // W1, 3, kiri bawah depan
+        [-0.6, 0.5, 0.05],   // D, 1, kiri atas depan
         [-0.5, 0.1, -0.05],   // A2, 4, kanan atas belakang
-        [-0.7, 0.6, -0.05],   // W, 5, kiri atas belakang
         [-0.5, -0.4, -0.05],   // F1, 6, kanan bawah belakang
-        [-0.7, 0.1, -0.05]   // Z1, 7, kiri bawah belakang
+        [-0.7, 0.1, -0.05],   // Z1, 7, kiri bawah belakang
+        [-0.7, 0.6, -0.05]  // W, 5, kiri atas belakang
     ];
 
 
     var cubeColors = [
         [],
-        [1.0, 1.0, 1.0],    // merah
-        [1.0, 1.0, 1.0],    // merah
-        [1.0, 1.0, 1.0],    // merah
-        [1.0, 1.0, 1.0],    // merah
-        [1.0, 1.0, 1.0],    // merah
-        [1.0, 1.0, 1.0],    // merah
+        [1.0, 0.0, 0.0],    // merah
+        [1.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
+        [1.0, 0.0, 0.0],
         []
     ];
 
@@ -109,6 +117,8 @@ function main() {
         []
     ];
 
+    //M kanan
+    //bar kanan
     var cubeNormals = [
         [],
         [0.0, 0.0, 1.0],    // depan
@@ -120,8 +130,80 @@ function main() {
         []
     ];
 
+    //bar kiri
+    var cubeNormals2 = [
+        [],
+        [0.0, 0.0, 1.0],    // depan
+        [1.0, 0.0, 0.0],    // kanan
+        [0.0, 1.0, 0.0],    // atas
+        [-1.0, 0.0, 0.0],   // kiri
+        [0.0, 0.0, -1.0],   // belakang
+        [0.0, -1.0, 0.0],   // bawah
+        []
+    ];
 
-    function quad(a, b, c, d) {
+    //miring kanan
+    var cubeNormals3 = [
+        [],
+        [0.0, 0.0, 1.0],    // depan
+        [1.0, 0.0, 0.0],    // kanan
+        [0.0, 1.0, 0.0],    // atas
+        [-1.0, 0.0, 0.0],   // kiri
+        [0.0, 0.0, -1.0],   // belakang
+        [0.0, -1.0, 0.0],   // bawah
+
+        []
+    ];
+    //bar kanan
+    var cubeNormals4 = [
+        [],
+        [0.0, 0.0, 1.0],    // depan
+        [-1.0, 0.0, 0.0],   // kiri
+        [0.0, 1.0, 0.0],    // atas
+        [1.0, 0.0, 0.0],    // kanan
+        [0.0, 0.0, -1.0],   // belakang
+        [0.0, -1.0, 0.0],   // bawah
+
+        []
+    ];
+
+    //bar kiri
+    var cubeNormals5 = [
+        [],
+        [0.0, 0.0, 1.0],    // depan
+        [-1.0, 0.0, 0.0],   // kiri
+        [0.0, 1.0, 0.0],    // atas
+        [1.0, 0.0, 0.0],    // kanan
+        [0.0, 0.0, -1.0],   // belakang
+        [0.0, -1.0, 0.0],   // bawah
+        []
+    ];
+    //miring
+    var cubeNormals6 = [
+        [],
+        [0.0, 0.0, 1.0],    // depan
+        [-1.0, 0.0, 0.0],   // kiri
+        [0.0, 1.0, 0.0],    // atas
+        [1.0, 0.0, 0.0],    // kanan
+        [0.0, 0.0, -1.0],   // belakang
+        [0.0, -1.0, 0.0],   // bawah
+        []
+    ];
+
+    var cubeNormals7 = [
+        [],
+        [0.0, 0.0, -1.0],   // depan
+        [-1.0, 0.0, 0.0],   // kanan
+        [0.0, -1.0, 0.0],   // atas 
+        [1.0, 0.0, 0.0],    // kiri
+        [0.0, 0.0, 1.0],    // belakang
+        [0.0, 1.0, 0.0],    // bawah
+        []
+    ];
+
+
+
+    function quad(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
 
         for (var i = 0; i < indices.length; i++) {
@@ -140,7 +222,7 @@ function main() {
         }
     }
 
-    function quad2(a, b, c, d) {
+    function quad2(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints2[indices[i]];  // [x, y, z]
@@ -151,13 +233,13 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals2[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
-    function quad3(a, b, c, d) {
+    function quad3(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints3[indices[i]];  // [x, y, z]
@@ -168,13 +250,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals3[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
-    function quad4(a, b, c, d) {
+
+    function quad4(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints4[indices[i]];  // [x, y, z]
@@ -185,14 +268,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals4[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad5(a, b, c, d) {
+    function quad5(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints5[indices[i]];  // [x, y, z]
@@ -203,14 +286,15 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals5[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad6(a, b, c, d) {
+
+    function quad6(a, b, c, d, vertices) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints6[indices[i]];  // [x, y, z]
@@ -221,14 +305,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals6[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad7(a, b, c, d) { //abcd triangle
+    function quad7(a, b, c, d, vertices) { //abcd triangle
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubeWhite[indices[i]];  // [x, y, z]
@@ -240,74 +324,64 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals7[a];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    quad(4, 5, 7, 6); // BELAKANG, oranye
-    quad(3, 7, 5, 1); // KIRI, putih
-    quad(3, 7, 6, 2); // BAWAH, kuning
-    quad(2, 6, 4, 0); // KANAN, hijau
-    quad(1, 2, 0, 3); // DEPAN, merah
-    quad(1, 5, 4, 0); // ATAS, biru
+    // disesuaikan dengan tampilan asli
+    quad(4, 5, 6, 7, rightvertices); // BELAKANG, oranye
+    quad(3, 7, 6, 2, rightvertices); // KIRI, putih
+    quad(1, 2, 6, 5, rightvertices); // BAWAH, kuning
+    quad(5, 1, 0, 4, rightvertices); // KANAN, hijau
+    quad(1, 2, 3, 0, rightvertices); // DEPAN, merah
+    quad(4, 0, 3, 7, rightvertices); // ATAS, biru
 
-    quad2(4, 5, 7, 6); // BELAKANG, oranye
-    quad2(3, 7, 5, 1); // KIRI, putih
-    quad2(3, 7, 6, 2); // BAWAH, kuning
-    quad2(2, 6, 4, 0); // KANAN, hijau
-    quad2(1, 2, 0, 3); // DEPAN, merah
-    quad2(1, 5, 4, 0); // ATAS, biru
+    quad2(4, 5, 6, 7, rightvertices); // BELAKANG, oranye
+    quad2(3, 7, 6, 2, rightvertices); // KIRI, putih
+    quad2(1, 2, 6, 5, rightvertices); // BAWAH, kuning
+    quad2(5, 1, 0, 4, rightvertices); // KANAN, hijau
+    quad2(1, 2, 3, 0, rightvertices); // DEPAN, merah
+    quad2(4, 0, 3, 7, rightvertices); // ATAS, biru
 
-    quad3(4, 5, 7, 6); // BELAKANG, oranye
-    quad3(3, 7, 5, 1); // KIRI, putih
-    quad3(3, 7, 6, 2); // BAWAH, kuning
-    quad3(2, 6, 4, 0); // KANAN, hijau
-    quad3(1, 2, 0, 3); // DEPAN, merah
-    quad3(1, 5, 4, 0); // ATAS, biru
+    quad3(4, 5, 6, 7, rightvertices); // BELAKANG, oranye
+    quad3(3, 7, 6, 2, rightvertices); // KIRI, putih
+    quad3(1, 2, 6, 5, rightvertices); // BAWAH, kuning
+    quad3(5, 1, 0, 4, rightvertices); // KANAN, hijau
+    quad3(1, 2, 3, 0, rightvertices); // DEPAN, merah
+    quad3(4, 0, 3, 7, rightvertices); // ATAS, biru
 
-    quad4(4, 5, 7, 6); // BELAKANG, oranye
-    quad4(3, 7, 5, 1); // KIRI, putih
-    quad4(3, 7, 6, 2); // BAWAH, kuning
-    quad4(2, 6, 4, 0); // KANAN, hijau
-    quad4(1, 2, 0, 3); // DEPAN, merah
-    quad4(1, 5, 4, 0); // ATAS, biru
+    quad4(4, 5, 6, 7, leftVertices); // BELAKANG, oranye
+    quad4(3, 7, 6, 2, leftVertices); // KIRI, putih
+    quad4(1, 2, 6, 5, leftVertices); // BAWAH, kuning
+    quad4(5, 1, 0, 4, leftVertices); // KANAN, hijau
+    quad4(1, 2, 3, 0, leftVertices); // DEPAN, merah
+    quad4(4, 0, 3, 7, leftVertices); // ATAS, biru
 
-    quad5(4, 5, 7, 6); // BELAKANG, oranye
-    quad5(3, 7, 5, 1); // KIRI, putih
-    quad5(3, 7, 6, 2); // BAWAH, kuning
-    quad5(2, 6, 4, 0); // KANAN, hijau
-    quad5(1, 2, 0, 3); // DEPAN, merah
-    quad5(1, 5, 4, 0); // ATAS, biru
+    quad5(4, 5, 6, 7, leftVertices); // BELAKANG, oranye
+    quad5(3, 7, 6, 2, leftVertices); // KIRI, putih
+    quad5(1, 2, 6, 5, leftVertices); // BAWAH, kuning
+    quad5(5, 1, 0, 4, leftVertices); // KANAN, hijau
+    quad5(1, 2, 3, 0, leftVertices); // DEPAN, merah
+    quad5(4, 0, 3, 7, leftVertices); // ATAS, biru
 
-    quad6(4, 5, 7, 6); // BELAKANG, oranye
-    quad6(3, 7, 5, 1); // KIRI, putih
-    quad6(3, 7, 6, 2); // BAWAH, kuning
-    quad6(2, 6, 4, 0); // KANAN, hijau
-    quad6(1, 2, 0, 3); // DEPAN, merah
-    quad6(1, 5, 4, 0); // ATAS, biru
+    quad6(4, 5, 6, 7, leftVertices); // BELAKANG, oranye
+    quad6(3, 7, 6, 2, leftVertices); // KIRI, putih
+    quad6(1, 2, 6, 5, leftVertices); // BAWAH, kuning
+    quad6(5, 1, 0, 4, leftVertices); // KANAN, hijau
+    quad6(1, 2, 3, 0, leftVertices); // DEPAN, merah
+    quad6(4, 0, 3, 7, leftVertices); // ATAS, biru
 
-    // quad(12, 3, 11, 9); // L depan
-    // quad(11, 9, 10, 8);
-    // quad(12, 11, 13, 10);
-    // quad(9, 3, 8, 7);
-    // quad(12, 11, 9, 3);
-    // quad(13, 10, 8, 7);
+    console.log("vertices length : " + vertices.length);
 
-    quad7(1, 2, 3, 0); // DEPAN, merah
-    quad7(2, 6, 7, 3); // KANAN, hijau
-    quad7(3, 7, 4, 0); // ATAS, biru
-    quad7(4, 5, 1, 0); // KIRI, putih
-    quad7(5, 4, 7, 6); // BELAKANG, oranye
-    quad7(6, 2, 1, 5); // BAWAH, kuning
-
-
-    var vertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+    quad7(1, 2, 3, 0, cubeVertices); // DEPAN, merah
+    quad7(2, 6, 7, 3, cubeVertices); // KANAN, hijau
+    quad7(3, 7, 4, 0, cubeVertices); // ATAS, biru
+    quad7(4, 5, 1, 0, cubeVertices); // KIRI, putih
+    quad7(5, 4, 7, 6, cubeVertices); // BELAKANG, oranye
+    quad7(6, 2, 1, 5, cubeVertices); // BAWAH, kuning
 
     var vertexShaderSource = document.getElementById("vertexShaderSource").text;
     var fragmentShaderSource = document.getElementById("fragmentShaderSource").text;
@@ -336,58 +410,14 @@ function main() {
     // Mulai menggunakan konteks (cat)
     gl.useProgram(shaderProgram);
 
-    // Ajarkan attribute a_Position di GPU
-    //  tentang pengambilan data verteks dari ARRAY_BUFFER
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.viewport(100, 0, canvas.height, canvas.height);
+    gl.enable(gl.DEPTH_TEST);
+
     var aPositionLoc = gl.getAttribLocation(shaderProgram, "a_Position");
     var aColorLoc = gl.getAttribLocation(shaderProgram, "a_Color");
     var aNormalLoc = gl.getAttribLocation(shaderProgram, "a_Normal");
-    gl.vertexAttribPointer(
-        aPositionLoc,
-        3,
-        gl.FLOAT,
-        false,
-        9 * Float32Array.BYTES_PER_ELEMENT,
-        0);
-    gl.vertexAttribPointer(
-        aColorLoc,
-        3,
-        gl.FLOAT,
-        false,
-        9 * Float32Array.BYTES_PER_ELEMENT,
-        3 * Float32Array.BYTES_PER_ELEMENT);
-    gl.vertexAttribPointer(
-        aNormalLoc,
-        3,
-        gl.FLOAT,
-        false,
-        9 * Float32Array.BYTES_PER_ELEMENT,
-        6 * Float32Array.BYTES_PER_ELEMENT);
-    gl.enableVertexAttribArray(aPositionLoc);
-    gl.enableVertexAttribArray(aColorLoc);
-    gl.enableVertexAttribArray(aNormalLoc);
-    gl.bindBuffer(gl.ARRAY_BUFFER, null);
-
-    function resizer() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        minVal = Math.min(gl.canvas.width, gl.canvas.height);
-        gl.viewport(gl.canvas.width / 2 - minVal / 2, gl.canvas.height / 2 - minVal / 2, minVal, minVal);
-        // draw();
-    }
-
-    //gl.viewport(100, 0, canvas.height, canvas.height);
-    window.addEventListener('resize', resizer);
-    gl.enable(gl.DEPTH_TEST);
 
     var primitive = gl.TRIANGLES;
-    var offset = 0;
-    var nVertex = 252;
-
-    var offset2 = + nVertex;
-    var offset3 = + nVertex;
-    var offset4 = + nVertex;
-    var offset5 = + nVertex;
 
     var u_Model = gl.getUniformLocation(shaderProgram, 'u_Model');
     var u_View = gl.getUniformLocation(shaderProgram, 'u_View');
@@ -397,47 +427,129 @@ function main() {
     var projection = glMatrix.mat4.create();
     gl.uniformMatrix4fv(u_Projection, false, projection);
 
-    var linearspeed = 0.01;
-    var angularspeed = glMatrix.glMatrix.toRadian(1);
-    function onKeyDown(event) {
-        console.log(event.keyCode);
-        if (event.keyCode == 65) {
-            glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [0, -1.0, 0.0]);
-        } // A = 65
-        else if (event.keyCode == 68) {
-            glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [0, 1.0, 0.0]);
-        } // D = 68
-        //if (event.keyCode == 38) {
-        //glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [-1.0, 0.0, 0.0]);
-        //} //up = 38
-        //if (event.keyCode == 40) {
-        //glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(1), [1.0, 0.0, 0.0]);
-        //} //down = 40
-    }
-    document.addEventListener('keydown', onKeyDown);
-
     var uNormalModel = gl.getUniformLocation(shaderProgram, 'u_NormalModel');
     var uAmbientColor = gl.getUniformLocation(shaderProgram, 'u_AmbientColor');
     gl.uniform3fv(uAmbientColor, [0.3, 0.3, 0.3]);
     var uLightColor = gl.getUniformLocation(shaderProgram, 'u_LightColor');
     gl.uniform3fv(uLightColor, [1, 1, 1]);
     var uLightPosition = gl.getUniformLocation(shaderProgram, 'u_LightPosition');
-    gl.uniform3fv(uLightPosition, [8, -1, 3]);
+    var uSpecularColor = gl.getUniformLocation(shaderProgram, 'u_Specularcolor');
+    var specularPower = gl.getUniformLocation(shaderProgram, 'specularPower');
 
-    // glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(45), [1.0, 1.0, 1.0]);
+    let lightPositionY = 0;
+    var linearspeed = 0.1;
+    var angularspeed = glMatrix.glMatrix.toRadian(1);
+    function onKeyDown(event) {
+        console.log(event.keyCode);
+        if (event.keyCode == 68) {  // D = 68
+            glMatrix.mat4.rotate(view, view, angularspeed, [0, -linearspeed, 0.0]);
+        } // A = 65
+        else if (event.keyCode == 65) {
+            glMatrix.mat4.rotate(view, view, angularspeed, [0, linearspeed, 0.0]);
+        }
+        if (event.keyCode == 87) {
+            for (let i = 0; i < 36 * 9; i++) {
+                if (i % 9 == 0) {
+                    cubeVertices[1 + i] += 0.01;
+                }
+            }
+            lightPositionY += 0.02;
+        } // W = 87
+        if (event.keyCode == 83) {
+            for (let i = 0; i < 36 * 9; i++) {
+                if (i % 9 == 0) {
+                    cubeVertices[1 + i] -= 0.01;
+                }
+            }
+            lightPositionY -= 0.01;
+        } // S = 83
+    }
+    document.addEventListener('keydown', onKeyDown);
+
+
+    var offset = 0;
+    var nVertex = 252;
+
+    var offset2 = + nVertex;
+    var offset3 = + nVertex;
+    var offset4 = + nVertex;
+    var offset5 = + nVertex;
+    var offset6 = + nVertex;
+    var offset7 = + nVertex;
+
+    const drawVertices = (vertices, shininess, clear) => {
+        var vertexBuffer = gl.createBuffer();
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+        // Ajarkan attribute a_Position di GPU
+        //  tentang pengambilan data verteks dari ARRAY_BUFFER
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+        gl.vertexAttribPointer(
+            aPositionLoc,
+            3,
+            gl.FLOAT,
+            false,
+            9 * Float32Array.BYTES_PER_ELEMENT,
+            0);
+        gl.vertexAttribPointer(
+            aColorLoc,
+            3,
+            gl.FLOAT,
+            false,
+            9 * Float32Array.BYTES_PER_ELEMENT,
+            3 * Float32Array.BYTES_PER_ELEMENT);
+        gl.vertexAttribPointer(
+            aNormalLoc,
+            3,
+            gl.FLOAT,
+            false,
+            9 * Float32Array.BYTES_PER_ELEMENT,
+            6 * Float32Array.BYTES_PER_ELEMENT);
+
+        gl.enableVertexAttribArray(aPositionLoc);
+        gl.enableVertexAttribArray(aColorLoc);
+        gl.enableVertexAttribArray(aNormalLoc);
+        gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+        gl.uniformMatrix4fv(u_Model, false, model);
+        gl.uniformMatrix4fv(u_View, false, view);
+        gl.uniform3fv(uLightPosition, [0, lightPositionY, 0]);
+        gl.uniform3fv(uSpecularColor, [1.0, 1.0, 1.0]);
+        var normalModel = glMatrix.mat3.create();
+        gl.uniform1f(specularPower, shininess);
+        glMatrix.mat3.normalFromMat4(normalModel, model);
+        gl.uniformMatrix3fv(uNormalModel, false, normalModel);
+
+        if (clear) {
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        }
+
+        gl.drawArrays(primitive, offset, vertices.length / 9);
+    }
 
     function render() {
         resizer();
-        // glMatrix.mat4.rotate(model, model, angularspeed, [1.0, 1.0, 1.0]);
-        gl.uniformMatrix4fv(u_Model, false, model);
-        gl.uniformMatrix4fv(u_View, false, view);
-        var normalModel = glMatrix.mat3.create();
-        glMatrix.mat3.normalFromMat4(normalModel, model);
-        gl.uniformMatrix3fv(uNormalModel, false, normalModel);
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.drawArrays(primitive, offset, nVertex);
+        drawVertices(cubeVertices, 100, true);
+        drawVertices(leftVertices, 1, false);
+        drawVertices(rightvertices, 800, false);
         requestAnimationFrame(render);
     }
+
     requestAnimationFrame(render);
+    function resizer() {
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        var minimumSize = Math.min(gl.canvas.height, gl.canvas.width);
+        gl.viewport(canvas.width / 2 - minimumSize / 2, canvas.height / 2 - minimumSize / 2, minimumSize, minimumSize);
+        //draw();
+    }
+
+    window.addEventListener('resize', resizer);
+
+
 }
