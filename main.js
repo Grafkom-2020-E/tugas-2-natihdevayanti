@@ -141,7 +141,6 @@ function main() {
         [1.0, 0.0, 0.0],    // kanan
         [0.0, 0.0, -1.0],   // belakang
         [0.0, -1.0, 0.0],   // bawah
-
         []
     ];
 
@@ -171,7 +170,7 @@ function main() {
     //bar kiri
     var cubeNormals5 = [
         [],
-        [0.0, 0.0, 1.0],    // depan
+        [-1.0, 0.0, 1.0],    // depan
         [1.0, 0.0, 0.0],    // kanan
         [0.0, 1.0, 0.0],    // atas
         [-1.0, 0.0, 0.0],   // kiri
@@ -203,9 +202,7 @@ function main() {
         []
     ];
 
-
-
-    function quad(a, b, c, d, vertices) {
+    function quad(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
 
         for (var i = 0; i < indices.length; i++) {
@@ -217,14 +214,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals[a];
+            var normal = cubeNormals[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad2(a, b, c, d, vertices) {
+    function quad2(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints2[indices[i]];  // [x, y, z]
@@ -235,13 +232,13 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals2[a];
+            var normal = cubeNormals2[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
-    function quad3(a, b, c, d, vertices) {
+    function quad3(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints3[indices[i]];  // [x, y, z]
@@ -252,14 +249,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals3[a];
+            var normal = cubeNormals3[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad4(a, b, c, d, vertices) {
+    function quad4(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints4[indices[i]];  // [x, y, z]
@@ -270,14 +267,14 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals4[a];
+            var normal = cubeNormals4[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
         }
     }
 
-    function quad5(a, b, c, d, vertices) {
+    function quad5(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints5[indices[i]];  // [x, y, z]
@@ -288,7 +285,7 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals5[a];
+            var normal = cubeNormals5[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
@@ -296,7 +293,7 @@ function main() {
     }
 
 
-    function quad6(a, b, c, d, vertices) {
+    function quad6(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
         for (var i = 0; i < indices.length; i++) {
             var point = cubePoints6[indices[i]];  // [x, y, z]
@@ -307,7 +304,7 @@ function main() {
             for (var j = 0; j < color.length; j++) {
                 vertices.push(color[j]);
             }
-            var normal = cubeNormals6[a];
+            var normal = cubeNormals6[e];
             for (var j = 0; j < normal.length; j++) {
                 vertices.push(normal[j]);
             }
@@ -334,47 +331,47 @@ function main() {
     }
 
     // disesuaikan dengan tampilan asli
-    quad(4, 5, 6, 7, verticeskanan); // BELAKANG, oranye
-    quad(3, 7, 6, 2, verticeskanan); // KIRI, putih
-    quad(1, 2, 6, 5, verticeskanan); // BAWAH, kuning
-    quad(5, 1, 0, 4, verticeskanan); // KANAN, hijau
-    quad(1, 2, 3, 0, verticeskanan); // DEPAN, merah
-    quad(4, 0, 3, 7, verticeskanan); // ATAS, biru
+    quad(4, 5, 6, 7, verticeskanan, 5); // BELAKANG, oranye
+    quad(3, 7, 6, 2, verticeskanan, 2); // KIRI, putih
+    quad(1, 2, 6, 5, verticeskanan, 6); // BAWAH, kuning
+    quad(5, 1, 0, 4, verticeskanan, 4); // KANAN, hijau
+    quad(1, 2, 3, 0, verticeskanan, 1); // DEPAN, merah
+    quad(4, 0, 3, 7, verticeskanan, 3); // ATAS, biru
 
-    quad2(4, 5, 6, 7, verticeskanan); // BELAKANG, oranye
-    quad2(3, 7, 6, 2, verticeskanan); // KIRI, putih
-    quad2(1, 2, 6, 5, verticeskanan); // BAWAH, kuning
-    quad2(5, 1, 0, 4, verticeskanan); // KANAN, hijau
-    quad2(1, 2, 3, 0, verticeskanan); // DEPAN, merah
-    quad2(4, 0, 3, 7, verticeskanan); // ATAS, biru
+    quad2(4, 5, 6, 7, verticeskanan, 5); // BELAKANG, oranye
+    quad2(3, 7, 6, 2, verticeskanan, 2); // KIRI, putih
+    quad2(1, 2, 6, 5, verticeskanan, 6); // BAWAH, kuning
+    quad2(5, 1, 0, 4, verticeskanan, 4); // KANAN, hijau
+    quad2(1, 2, 3, 0, verticeskanan, 1); // DEPAN, merah
+    quad2(4, 0, 3, 7, verticeskanan, 3); // ATAS, biru
 
-    quad3(4, 5, 6, 7, verticeskanan); // BELAKANG, oranye
-    quad3(3, 7, 6, 2, verticeskanan); // KIRI, putih
-    quad3(1, 2, 6, 5, verticeskanan); // BAWAH, kuning
-    quad3(5, 1, 0, 4, verticeskanan); // KANAN, hijau
-    quad3(1, 2, 3, 0, verticeskanan); // DEPAN, merah
-    quad3(4, 0, 3, 7, verticeskanan); // ATAS, biru
+    quad3(4, 5, 6, 7, verticeskanan, 5); // BELAKANG, oranye
+    quad3(3, 7, 6, 2, verticeskanan, 2); // KIRI, putih
+    quad3(1, 2, 6, 5, verticeskanan, 6); // BAWAH, kuning
+    quad3(5, 1, 0, 4, verticeskanan, 4); // KANAN, hijau
+    quad3(1, 2, 3, 0, verticeskanan, 1); // DEPAN, merah
+    quad3(4, 0, 3, 7, verticeskanan, 3); // ATAS, biru
 
-    quad4(4, 5, 6, 7, verticeskiri); // BELAKANG, oranye
-    quad4(3, 7, 6, 2, verticeskiri); // KIRI, putih
-    quad4(1, 2, 6, 5, verticeskiri); // BAWAH, kuning
-    quad4(5, 1, 0, 4, verticeskiri); // KANAN, hijau
-    quad4(1, 2, 3, 0, verticeskiri); // DEPAN, merah
-    quad4(4, 0, 3, 7, verticeskiri); // ATAS, biru
+    quad4(4, 5, 6, 7, verticeskiri, 5); // BELAKANG, oranye
+    quad4(3, 7, 6, 2, verticeskiri, 4); // KIRI, putih
+    quad4(1, 2, 6, 5, verticeskiri, 6); // BAWAH, kuning
+    quad4(5, 1, 0, 4, verticeskiri, 2); // KANAN, hijau
+    quad4(1, 2, 3, 0, verticeskiri, 1); // DEPAN, merah
+    quad4(4, 0, 3, 7, verticeskiri, 3); // ATAS, biru
 
-    quad5(4, 5, 6, 7, verticeskiri); // BELAKANG, oranye
-    quad5(3, 7, 6, 2, verticeskiri); // KIRI, putih
-    quad5(1, 2, 6, 5, verticeskiri); // BAWAH, kuning
-    quad5(5, 1, 0, 4, verticeskiri); // KANAN, hijau
-    quad5(1, 2, 3, 0, verticeskiri); // DEPAN, merah
-    quad5(4, 0, 3, 7, verticeskiri); // ATAS, biru
+    quad5(4, 5, 6, 7, verticeskiri, 1); // BELAKANG, oranye
+    quad5(3, 7, 6, 2, verticeskiri, 4); // KIRI, putih
+    quad5(1, 2, 6, 5, verticeskiri, 6); // BAWAH, kuning
+    quad5(5, 1, 0, 4, verticeskiri, 2); // KANAN, hijau
+    quad5(1, 2, 3, 0, verticeskiri, 5); // DEPAN, merah
+    quad5(4, 0, 3, 7, verticeskiri, 3); // ATAS, biru
 
-    quad6(4, 5, 6, 7, verticeskiri); // BELAKANG, oranye
-    quad6(3, 7, 6, 2, verticeskiri); // KIRI, putih
-    quad6(1, 2, 6, 5, verticeskiri); // BAWAH, kuning
-    quad6(5, 1, 0, 4, verticeskiri); // KANAN, hijau
-    quad6(1, 2, 3, 0, verticeskiri); // DEPAN, merah
-    quad6(4, 0, 3, 7, verticeskiri); // ATAS, biru
+    quad6(4, 5, 6, 7, verticeskiri, 5); // BELAKANG, oranye
+    quad6(3, 7, 6, 2, verticeskiri, 4); // KIRI, putih
+    quad6(1, 2, 6, 5, verticeskiri, 6); // BAWAH, kuning
+    quad6(5, 1, 0, 4, verticeskiri, 2); // KANAN, hijau
+    quad6(1, 2, 3, 0, verticeskiri, 1); // DEPAN, merah
+    quad6(4, 0, 3, 7, verticeskiri, 3); // ATAS, biru
 
     console.log("vertices length : " + vertices.length);
 
@@ -450,13 +447,12 @@ function main() {
             glMatrix.mat4.rotate(view, view, angularspeed, [0, linearspeed, 0.0]);
         }
         if (event.keyCode == 87) {
-
             for (let i = 0; i < 36 * 9; i++) {
                 if (i % 9 == 0) {
                     verticesKubus[1 + i] += 0.01;
                 }
             }
-            lightPositionY += 0.02;
+            lightPositionY += 0.01;
         } // W = 87
         if (event.keyCode == 83) {
             for (let i = 0; i < 36 * 9; i++) {
@@ -472,7 +468,6 @@ function main() {
 
     var offset = 0;
     var nVertex = 252;
-
     var offset2 = + nVertex;
     var offset3 = + nVertex;
     var offset4 = + nVertex;
@@ -537,9 +532,9 @@ function main() {
     function render() {
         resizer();
         gl.clearColor(0.0, 0.0, 0.0, 0.0);
-        drawVertices(verticesKubus, 100, true);
+        drawVertices(verticesKubus, 10, true);
         drawVertices(verticeskiri, 1, false);
-        drawVertices(verticeskanan, 800, false);
+        drawVertices(verticeskanan, 300, false);
         requestAnimationFrame(render);
     }
 
@@ -551,7 +546,6 @@ function main() {
         gl.viewport(canvas.width / 2 - minimumSize / 2, canvas.height / 2 - minimumSize / 2, minimumSize, minimumSize);
         //draw();
     }
-
     window.addEventListener('resize', resizer);
 
 
