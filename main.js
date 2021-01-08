@@ -619,7 +619,6 @@ function main() {
             drawVertices(verticeskiri, 0, false);
             drawVertices(verticeskanan, 0, false);
         }
-
         // drawVertices(verticesKubus, 10, true);
         // drawVertices(verticeskiri, 1, false);
         // drawVertices(verticeskanan, 300, false);
