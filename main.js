@@ -436,6 +436,41 @@ function main() {
     var specularPower = gl.getUniformLocation(shaderProgram, 'specularPower');
 
     let lightPositionY = 0;
+    let lightPositionX = 0;
+    let lightPositionZ = 0;
+
+    function onKeyDown(event) {
+        if (event.keyCode == 39) {
+            for (let i = 0; i < 36 * 9; i++) {
+                verticesKubus[0 + (9 * (i - 1))] += 0.01;
+                // console.log("s ");
+            }
+            lightPositionX += 0.01;
+        }
+        if (event.keyCode == 37) {
+            for (let i = 0; i < 36 * 9; i++) {
+                verticesKubus[0 + (9 * (i - 1))] -= 0.01;
+                // console.log("s ");
+            }
+            lightPositionX -= 0.01;
+        }
+
+        if (event.keyCode == 40) {
+            for (let i = 0; i < 36 * 9; i++) {
+                verticesKubus[2 + (9 * (i - 1))] -= 0.01;
+                // console.log("s ");
+            }
+            lightPositionZ -= 0.01;
+        }
+        if (event.keyCode == 38) {
+            for (let i = 0; i < 36 * 9; i++) {
+                verticesKubus[2 + (9 * (i - 1))] += 0.01;
+                // console.log("s ");
+            }
+            lightPositionZ += 0.01;
+        }
+    }
+    document.addEventListener('keydown', onKeyDown);
 
     var offset = 0;
     var nVertex = 252;
@@ -485,7 +520,7 @@ function main() {
 
         gl.uniformMatrix4fv(u_Model, false, model);
         gl.uniformMatrix4fv(u_View, false, view);
-        gl.uniform3fv(uLightPosition, [0, lightPositionY, 0]);
+        gl.uniform3fv(uLightPosition, [lightPositionX, lightPositionY, lightPositionZ]);
         gl.uniform3fv(uSpecularColor, [1.0, 1.0, 1.0]);
         var normalModel = glMatrix.mat3.create();
         gl.uniform1f(specularPower, shininess);
@@ -498,6 +533,7 @@ function main() {
 
         gl.drawArrays(primitive, offset, vertices.length / 9);
     }
+    glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(10), [0.4, 0.5, 0.0]);
     // glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(-45), [0, -0.1, 0.0]);
     //glMatrix.mat4.rotate(view, view, angularspeed, [1, 1, 1]);
     function render() {
