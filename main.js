@@ -436,8 +436,6 @@ function main() {
     var specularPower = gl.getUniformLocation(shaderProgram, 'specularPower');
 
     let lightPositionY = 0;
-    var linearspeed = 0.1;
-    var angularspeed = glMatrix.glMatrix.toRadian(1);
 
     var offset = 0;
     var nVertex = 252;
