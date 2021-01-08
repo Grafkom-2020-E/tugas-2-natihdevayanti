@@ -84,6 +84,17 @@ function main() {
     ];
 
 
+    var alasPoints = [
+        [-10, -0.6, 10],   // N, 6 
+        [-10, -0.6, 10],   // N, 6 
+        [10, -0.6, 10],   // N, 6  
+        [10, -0.6, 10],   // N, 6 
+        [-10, -0.6, -10],   // N, 6 
+        [-10, -0.6, -10],   // N, 6
+        [10, -0.6, -10],   // N, 6
+        [10, -0.6, -10],   // N, 6   
+    ];
+
     var cubeColors = [
         [],
         [1.0, 0.0, 0.0],    // merah
@@ -92,6 +103,18 @@ function main() {
         [1.0, 0.0, 0.0],
         [1.0, 0.0, 0.0],
         [1.0, 0.0, 0.0],
+        []
+    ];
+
+    //NRP 163
+    var alasColors = [
+        [],
+        [0.08, 0.19, 0.39],    // biru
+        [0.08, 0.19, 0.39],   // biru
+        [0.08, 0.19, 0.39],   // biru
+        [0.08, 0.19, 0.39],    // biru
+        [0.08, 0.19, 0.39],    // biru
+        [0.08, 0.19, 0.39],   // biru
         []
     ];
 
@@ -179,6 +202,8 @@ function main() {
 
         []
     ];
+
+
     //miring
     var cubeNormals6 = [
         [],
@@ -202,6 +227,16 @@ function main() {
         []
     ];
 
+    var cubeNormals8 = [
+        [],
+        [0.0, 0.0, 0.0],   // depan
+        [1.0, 0.0, 0.0],   // kanan
+        [0.0, 1.0, 0.0],   // atas 
+        [0.0, 0.0, 0.0],    // kiri
+        [0.0, 0.0, 0.0],    // belakang
+        [0.0, 1.0, 0.0],    // bawah
+        []
+    ];
     function quad(a, b, c, d, vertices, e) {
         var indices = [a, b, c, c, d, a];
 
@@ -330,6 +365,25 @@ function main() {
         }
     }
 
+    function quad8(a, b, c, d, vertices) { //abcd triangle
+        var indices = [a, b, c, c, d, a];
+        for (var i = 0; i < indices.length; i++) {
+            var point = alasPoints[indices[i]];  // [x, y, z]
+            for (var j = 0; j < point.length; j++) {
+                vertices.push(point[j]);
+            }
+            // b, 
+            var color = alasColors[a]; // [r, g, b]
+            for (var j = 0; j < color.length; j++) {
+                vertices.push(color[j]);
+            }
+            var normal = cubeNormals8[a];
+            for (var j = 0; j < normal.length; j++) {
+                vertices.push(normal[j]);
+            }
+        }
+    }
+
     // disesuaikan dengan tampilan asli
     quad(4, 5, 6, 7, verticeskanan, 5); // BELAKANG, oranye
     quad(3, 7, 6, 2, verticeskanan, 2); // KIRI, putih
@@ -381,6 +435,13 @@ function main() {
     quad7(4, 5, 1, 0, verticesKubus); // KIRI, putih
     quad7(5, 4, 7, 6, verticesKubus); // BELAKANG, oranye
     quad7(6, 2, 1, 5, verticesKubus); // BAWAH, kuning
+
+    quad8(1, 2, 3, 0, verticesKubus); // DEPAN, merah
+    quad8(2, 6, 7, 3, verticesKubus); // KANAN, hijau
+    quad8(3, 7, 4, 0, verticesKubus); // ATAS, biru
+    quad8(4, 5, 1, 0, verticesKubus); // KIRI, putih
+    quad8(5, 4, 7, 6, verticesKubus); // BELAKANG, oranye
+    quad8(6, 2, 1, 5, verticesKubus); // BAWAH, kuning
 
     var vertexShaderSource = document.getElementById("vertexShaderSource").text;
     var fragmentShaderSource = document.getElementById("fragmentShaderSource").text;
@@ -473,13 +534,14 @@ function main() {
     document.addEventListener('keydown', onKeyDown);
 
     var offset = 0;
-    var nVertex = 252;
+    var nVertex = 288;
     var offset2 = + nVertex;
     var offset3 = + nVertex;
     var offset4 = + nVertex;
     var offset5 = + nVertex;
     var offset6 = + nVertex;
     var offset7 = + nVertex;
+    var offset8 = + nVertex;
 
     const drawVertices = (vertices, shininess, clear) => {
         var vertexBuffer = gl.createBuffer();
@@ -534,7 +596,8 @@ function main() {
         gl.drawArrays(primitive, offset, vertices.length / 9);
     }
     glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(10), [0.4, 0.5, 0.0]);
-    // glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(-45), [0, -0.1, 0.0]);
+
+    //glMatrix.mat4.rotate(model, model, glMatrix.glMatrix.toRadian(-90), [0, -0.1, 0.0]);
     //glMatrix.mat4.rotate(view, view, angularspeed, [1, 1, 1]);
     function render() {
         resizer();
