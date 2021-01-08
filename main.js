@@ -438,33 +438,6 @@ function main() {
     let lightPositionY = 0;
     var linearspeed = 0.1;
     var angularspeed = glMatrix.glMatrix.toRadian(1);
-    function onKeyDown(event) {
-        console.log(event.keyCode);
-        if (event.keyCode == 68) {  // D = 68
-            glMatrix.mat4.rotate(view, view, angularspeed, [0, -linearspeed, 0.0]);
-        } // A = 65
-        else if (event.keyCode == 65) {
-            glMatrix.mat4.rotate(view, view, angularspeed, [0, linearspeed, 0.0]);
-        }
-        if (event.keyCode == 87) {
-            for (let i = 0; i < 36 * 9; i++) {
-                if (i % 9 == 0) {
-                    verticesKubus[1 + i] += 0.01;
-                }
-            }
-            lightPositionY += 0.01;
-        } // W = 87
-        if (event.keyCode == 83) {
-            for (let i = 0; i < 36 * 9; i++) {
-                if (i % 9 == 0) {
-                    verticesKubus[1 + i] -= 0.01;
-                }
-            }
-            lightPositionY -= 0.01;
-        } // S = 83
-    }
-    document.addEventListener('keydown', onKeyDown);
-
 
     var offset = 0;
     var nVertex = 252;
