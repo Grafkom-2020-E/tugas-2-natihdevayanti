@@ -530,6 +530,10 @@ function main() {
             }
             lightPositionZ += 0.01;
         }
+        if (event.keyCode == 32) {
+            lightOn = !lightOn;
+        }
+        let lightOn = 1;
     }
     document.addEventListener('keydown', onKeyDown);
 
@@ -602,10 +606,24 @@ function main() {
     function render() {
         resizer();
         gl.clearColor(0.0, 0.0, 0.0, 0.0);
-        drawVertices(verticesKubus, 10, true);
-        drawVertices(verticeskiri, 1, false);
-        drawVertices(verticeskanan, 300, false);
-        requestAnimationFrame(render);
+        if (lightOn) {
+            gl.uniform3fv(uAmbientColor, [0.3, 0.3, 0.3]);
+            gl.uniform3fv(uLightColor, [1, 1, 1]);
+            drawVertices(verticesKubus, 1, true);
+            drawVertices(verticeskiri, 1, false);
+            drawVertices(verticeskanan, 300, false);
+        } else {
+            gl.uniform3fv(uAmbientColor, [0, 0, 0]);
+            gl.uniform3fv(uLightColor, [0, 0, 0]);
+            drawVertices(verticesKubus, 0, true);
+            drawVertices(verticeskiri, 0, false);
+            drawVertices(verticeskanan, 0, false);
+        }
+
+        // drawVertices(verticesKubus, 10, true);
+        // drawVertices(verticeskiri, 1, false);
+        // drawVertices(verticeskanan, 300, false);
+        // requestAnimationFrame(render);
     }
 
     requestAnimationFrame(render);
@@ -617,6 +635,5 @@ function main() {
         //draw();
     }
     window.addEventListener('resize', resizer);
-
 
 }
